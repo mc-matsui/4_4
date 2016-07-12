@@ -23,23 +23,31 @@ if (!$db)
 }
 
 
-//DB削除(郵便番号の値を取得してループ)
-foreach ($_POST["sakujo"] as $zip_code)
+if (isset($_POST["sakujo"]))
 {
-	$sql = "DELETE FROM  `kadai_matsui_ziplist` WHERE  `zip_code` =  '$zip_code'";
-	mysql_query("$sql");
-}
+	//DB削除(郵便番号の値を取得してループ)
+	foreach ($_POST["sakujo"] as $zip_code)
+	{
+		$sql = "DELETE FROM  `kadai_matsui_ziplist` WHERE  `zip_code` =  '$zip_code'";
+		mysql_query("$sql");
+	}
 
-$rst = mysql_query($sql, $link);
+	$rst = mysql_query($sql, $link);
 
-//DB削除チェック
-if ($rst)
-{
-	print "削除しました<br><br>";
+	//DB削除チェック
+	if ($rst)
+	{
+		print "削除しました。<br><br>";
+	}
+	else
+	{
+		print "削除できませんでした。<br><br>";
+	}
 }
 else
 {
-	print "削除できませんでした<br><br>";
+	print "削除するリストを選択してください!!<br><br>";
+	print "削除できませんでした。<br><br>";
 }
 
 
