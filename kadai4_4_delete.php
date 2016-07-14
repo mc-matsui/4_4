@@ -25,19 +25,36 @@ if (!$db)
 
 if (isset($_POST["sakujo"]))
 {
+	//件数の配列を初期化
+	$cnt = array();
+
 	//DB削除(郵便番号の値を取得してループ)
 	foreach ($_POST["sakujo"] as $zip_code)
 	{
-		$sql = "DELETE FROM  `kadai_matsui_ziplist` WHERE  `zip_code` =  '$zip_code'";
-		mysql_query("$sql");
+			$sql = "DELETE FROM  `kadai_matsui_ziplist` WHERE  `zip_code` =  '$zip_code'";
+			$result = mysql_query("$sql");
+
+			/*if ($result) {
+				$cnt += mysql_affected_rows();
+			}*/
+
+			//array_push($cnt, $zip_code);
+			$cnt[] = $zip_code;
+
 	}
+	$total = count($cnt);
+
+	//var_dump($cnt,$total);
 
 	$rst = mysql_query($sql, $link);
 
+
+	//var_dump($rst);
+
 	//DB削除チェック
-	if ($rst)
+	if ($total)
 	{
-		print "削除しました。<br><br>";
+		print $total."件削除しました。<br><br>";
 	}
 	else
 	{
