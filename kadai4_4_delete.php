@@ -34,11 +34,14 @@ if (isset($_POST["sakujo"]))
 			$sql = "DELETE FROM  `kadai_matsui_ziplist` WHERE  `zip_code` =  '$zip_code'";
 			$result = mysql_query("$sql");
 
+			//mysql_query成功判定
 			if ($result) {
 				//$cnt += mysql_affected_rows();
+				//削除成功をカウント
 				$cnt[] = $zip_code;
 				$total = count($cnt);
 			}else {
+				//削除失敗をカウント
 				$cnt[] = $zip_code;
 				$err = count($cnt);
 
