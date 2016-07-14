@@ -34,31 +34,33 @@ if (isset($_POST["sakujo"]))
 			$sql = "DELETE FROM  `kadai_matsui_ziplist` WHERE  `zip_code` =  '$zip_code'";
 			$result = mysql_query("$sql");
 
-			/*if ($result) {
-				$cnt += mysql_affected_rows();
-			}*/
+			if ($result) {
+				//$cnt += mysql_affected_rows();
+				$cnt[] = $zip_code;
+				$total = count($cnt);
+			}else {
+				$cnt[] = $zip_code;
+				$err = count($cnt);
+
+			}
 
 			//array_push($cnt, $zip_code);
-			$cnt[] = $zip_code;
+			//$cnt[] = $zip_code;
 
 	}
-	$total = count($cnt);
+	//$total = count($cnt);
 
-	//var_dump($cnt,$total);
 
 	$rst = mysql_query($sql, $link);
 
-
-	//var_dump($rst);
-
 	//DB削除チェック
-	if ($total)
+	if ($rst)
 	{
 		print $total."件削除しました。<br><br>";
 	}
 	else
 	{
-		print "削除できませんでした。<br><br>";
+		print $err."件削除できませんでした。<br><br>";
 	}
 }
 else
