@@ -25,8 +25,9 @@ if (!$db)
 
 if (isset($_POST["sakujo"]))
 {
-	//件数の配列を初期化
+	//件数の配列を初期化（$cnt→成功、$cnterr→失敗）
 	$cnt = array();
+	$cnterr = array();
 
 	//DB削除(郵便番号の値を取得してループ)
 	foreach ($_POST["sakujo"] as $zip_code)
@@ -42,8 +43,8 @@ if (isset($_POST["sakujo"]))
 				$total = count($cnt);
 			}else {
 				//削除失敗をカウント
-				$cnt[] = $zip_code;
-				$err = count($cnt);
+				$cnterr[] = $zip_code;
+				$err = count($cnterr);
 
 			}
 
